@@ -1,0 +1,36 @@
+group 'com.veeroute'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.kotlin_version = '1.1.0-dev-4227'
+
+    repositories {
+        mavenCentral()
+        maven { url 'https://dl.bintray.com/kotlin/kotlin-dev' }
+        }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'kotlin'
+
+repositories {
+    mavenCentral()
+    maven { url "http://dl.bintray.com/cy6ergn0m/maven" }
+    maven { url 'https://dl.bintray.com/kotlin/kotlin-dev' }
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile 'org.jetbrains.kotlinx:vertx3-lang-kotlin:0.0.+'
+    compile 'io.vertx:vertx-web:3.3.3'
+	compile 'io.vertx:vertx-mysql-postgresql-client:3.3.3'
+}
+
+task runExample(dependsOn: [classes], type: JavaExec) {
+    main = 'io.vertx.core.Launcher'
+    args 'run', 'com.veeroute.fb.RootVerticle', '-conf', 'conf/bot-dev.json'
+    classpath = sourceSets.main.runtimeClasspath
+}

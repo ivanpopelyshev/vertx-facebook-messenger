@@ -1,12 +1,14 @@
-*.class
+# Intellij idea
+.idea
+build
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.ear
+# Gradle
+.gradle
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+#real configs
+
+conf/bot-dev.json
+conf/bot-prod.json
