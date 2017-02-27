@@ -78,8 +78,8 @@ class PageVerticle : AbstractVerticle() {
 
     fun receivedMessage(event: JsonObject) {
         println("receivedMessage $event")
-        val txt = (event.map["message"] as JsonObject)?.getString("text")
-        val senderID = (event.map["sender"] as JsonObject)?.getString("id")
+        val txt = event.getJsonObject("message")?.getString("text")
+        val senderID = event.getJsonObject("sender")?.getString("id")
         if (txt != null && senderID != null) {
             if (txt == "generic") {
                 sendGenericMessage(senderID);
@@ -90,10 +90,10 @@ class PageVerticle : AbstractVerticle() {
     }
 
     fun receivedPostback(event: JsonObject) {
-        val recipientID = (event.map["recipient"] as JsonObject)?.getString("id")
-        val senderID = (event.map["sender"] as JsonObject)?.getString("id")
-        var timeOfPostback = event.map["timestamp"];
-        var payload = (event.map["postback"] as JsonObject)?.getString("payload");
+        val recipientID = event.getJsonObject("recipient")?.getString("id")
+        val senderID = event.getJsonObject("sender")?.getString("id")
+        var timeOfPostback = event.getJsonObject("timestamp");
+        var payload = event.getJsonObject("postback")?.getString("payload");
         if (recipientID != null &&
                 senderID != null &&
                 timeOfPostback != null &&
